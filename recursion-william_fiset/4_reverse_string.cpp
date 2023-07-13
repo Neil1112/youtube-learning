@@ -29,29 +29,21 @@ string reverse2(int index, string word) {
 // 1. n_rago_d
 // 2. no_ag_rd
 // 3. nogard
-string reverse3(int start_index, int end_index, string word) {
-    // check if index is out of bound
-    if (start_index < 0 || end_index >= word.length())
-        return "";
-
-    // base case
-    if (start_index > end_index) {
+string reverse3(string word) {
+    // base case: if the string has length 0 or 1, it is already reversed
+    if (word.length() <= 1) {
         return word;
     }
 
-    // recursive call
-    char a = word[start_index];
-    char b = word[end_index];
-
-    word[start_index] = b;
-    word[end_index] = a;
-    return reverse3(start_index+1, end_index-1, word);
+    // Recursive step: reverse the substring that excludes the first and last character
+    // and swap the first and last character
+    return word.back() + reverse3(word.substr(1, word.length() - 2)) + word.front();
 }
 
 
 // Function to detect palindrome
 bool palindrome(string word) {
-    if (word == reverse3(0, word.length()-1, word))
+    if (word == reverse3(word))
         return true;
     
     return false;
@@ -63,7 +55,7 @@ int main() {
 
     cout << "Reverse of string - " << word << " is: " << reverse1(word) << endl;
     cout << "Reverse of string - " << word << " is: " << reverse2(word.length(), word) << endl;
-    cout << "Reverse of string - " << word << " is: " << reverse3(0, word.length()-1, word) << endl;
+    cout << "Reverse of string - " << word << " is: " << reverse3(word) << endl;
 
     if (palindrome(word))
         cout << "String - " << word << " is a palindrome" << endl;
