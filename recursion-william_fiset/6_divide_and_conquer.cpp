@@ -35,10 +35,16 @@ Result findMax(size_t start_index, size_t end_index, const vector<int>& list) {
 }
 
 
+// wrapper function
+Result findMax(const vector<int>& list) {
+    return findMax(0, list.size()-1, list);
+}
+
+
 int main() {
     vector<int> list = {1, 2, 3, 4, 5, 6, 7, 8};
 
-    Result result = findMax(0, list.size()-1, list);
+    Result result = findMax(list);
     cout << "Max value: " << result.value << " at index: " << result.index << endl;
 
     return 0;
