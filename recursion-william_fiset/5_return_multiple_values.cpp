@@ -18,12 +18,13 @@ struct Result {
 Result findMax(int index, vector<int> list) {
     // base case
     // case1: index is out of bounds
-    if (index > list.size() || list.size() <= 0)
+    if (index >= list.size() || list.size() <= 0)
         return Result(-1, -1);
 
     // case2: index is at the last element
     if (index == list.size() - 1)
         return Result(list[index], index);
+
 
     // recursive step
     Result result = findMax(index+1, list);
